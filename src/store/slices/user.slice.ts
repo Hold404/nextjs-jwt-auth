@@ -34,7 +34,11 @@ export const getUser = createAsyncThunk('user/get', async () => {
 
 const initialState: UserInitialState = {
   isLoading: true,
-  user: null,
+  auth: false,
+  user: {
+    login: '',
+    email: '',
+  },
 };
 
 export const userSlice = createSlice({
@@ -47,7 +51,7 @@ export const userSlice = createSlice({
 
     logoutUser: (state) => {
       state.isLoading = false;
-      state.user = null;
+      state.auth = false;
 
       destroyCookie(null, 'accessToken');
       destroyCookie(null, 'refreshToken');
@@ -57,48 +61,48 @@ export const userSlice = createSlice({
     builder
       .addCase(loginUser.pending, (state, action: any) => {
         state.isLoading = true;
-        state.user = null;
+        state.auth = false;
       })
       .addCase(loginUser.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.user = null;
+        state.auth = false;
       })
       .addCase(loginUser.fulfilled, (state, action: any) => {
         state.isLoading = false;
+        state.auth = true;
         state.user = {
-          auth: true,
           login: action.payload!.login,
           email: action.payload!.email,
         };
       })
       .addCase(registerUser.pending, (state, action: any) => {
         state.isLoading = true;
-        state.user = null;
+        state.auth = false;
       })
       .addCase(registerUser.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.user = null;
+        state.auth = false;
       })
       .addCase(registerUser.fulfilled, (state, action: any) => {
         state.isLoading = false;
+        state.auth = true;
         state.user = {
-          auth: true,
           login: action.payload!.login,
           email: action.payload!.email,
         };
       })
       .addCase(getUser.pending, (state, action: any) => {
         state.isLoading = true;
-        state.user = null;
+        state.auth = false;
       })
       .addCase(getUser.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.user = null;
+        state.auth = false;
       })
       .addCase(getUser.fulfilled, (state, action: any) => {
         state.isLoading = false;
+        state.auth = true;
         state.user = {
-          auth: true,
           login: action.payload!.login,
           email: action.payload!.email,
         };

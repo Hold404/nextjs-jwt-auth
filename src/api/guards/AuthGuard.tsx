@@ -4,18 +4,18 @@ import { FC, ReactNode, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 type Props = {
-  auth: boolean;
+  needAuth: boolean;
   children: ReactNode;
 };
 
-const AuthGuard: FC<Props> = ({ auth, children }) => {
+const AuthGuard: FC<Props> = ({ needAuth, children }) => {
   const [allow, setAllow] = useState(false);
-  const { user, isLoading } = useSelector((state: RootState) => state.user);
+  const { auth, isLoading } = useSelector((state: RootState) => state.user);
   const { replace } = useRouter();
 
   useEffect(() => {
-    if (!user && auth && !isLoading) replace('/');
-    else if (user && !auth && !isLoading) replace('/');
+    if (!auth && needAuth && !isLoading) replace('/');
+    else if (auth && !needAuth && !isLoading) replace('/');
     else {
       if (!isLoading) setAllow(true);
     }

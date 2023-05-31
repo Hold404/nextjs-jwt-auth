@@ -18,9 +18,10 @@ const ProfilePage: NextPage = () => {
   };
 
   return (
-    <AuthGuard auth={true}>
+    <AuthGuard needAuth={true}>
       <div>
         <h2>Profile</h2>
+        <h3>{user.login}</h3>
         <form onSubmit={handleSubmit(onSubmit)}>
           <button type="submit">Logout</button>
         </form>

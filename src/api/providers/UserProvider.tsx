@@ -6,11 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   const dispatch = useDispatch<AppDispatch>();
-  const { user } = useSelector((state: RootState) => state.user);
+  const { auth } = useSelector((state: RootState) => state.user);
   const accessToken = parseCookies().accessToken;
 
   useEffect(() => {
-    if (!user) {
+    if (!auth) {
       if (!accessToken) dispatch(setLoading(false));
       else dispatch(getUser());
     }

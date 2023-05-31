@@ -1,5 +1,4 @@
 export type User = {
-  auth: boolean;
   login: string;
   email: string;
 };
@@ -12,5 +11,6 @@ export type ApiUser = {
 
 export type UserInitialState = {
   isLoading: boolean;
-  user: User | null;
+  auth: boolean;
+  user: User;
 };

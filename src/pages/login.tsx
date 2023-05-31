@@ -18,7 +18,7 @@ const LoginPage: NextPage = () => {
   };
 
   return (
-    <AuthGuard auth={false}>
+    <AuthGuard needAuth={false}>
       <div className="w-screen h-screen flex items-center justify-center">
         <form
           onSubmit={handleSubmit(onSubmit)}

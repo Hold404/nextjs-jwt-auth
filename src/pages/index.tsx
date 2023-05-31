@@ -4,11 +4,11 @@ import Link from 'next/link';
 import { useSelector } from 'react-redux';
 
 const HomePage: NextPage = () => {
-  const { user, isLoading } = useSelector((state: RootState) => state.user);
+  const { auth, isLoading } = useSelector((state: RootState) => state.user);
 
   if (isLoading) return <h2>Loading</h2>;
 
-  if (!user)
+  if (!auth)
     return (
       <div>
         <Link href="/login">Login</Link>
