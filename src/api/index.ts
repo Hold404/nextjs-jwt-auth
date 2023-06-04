@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { parseCookies } from 'nookies';
-import { config } from 'process';
 
 export const publicApi = axios.create({
   baseURL: 'http://localhost:5000/api/v1',

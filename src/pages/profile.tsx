@@ -1,14 +1,15 @@
 import AuthGuard from '@/api/guards/AuthGuard';
-import { AppDispatch, RootState } from '@/store';
+import { useUser } from '@/hooks/useUser';
+import { AppDispatch } from '@/store';
 import { logoutUser } from '@/store/slices/user.slice';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const ProfilePage: NextPage = () => {
   const { handleSubmit } = useForm();
-  const { user } = useSelector((state: RootState) => state.user);
+  const { login } = useUser();
   const dispatch = useDispatch<AppDispatch>();
   const { replace } = useRouter();
 
@@ -21,7 +22,7 @@ const ProfilePage: NextPage = () => {
     <AuthGuard needAuth={true}>
       <div>
         <h2>Profile</h2>
-        <h3>{user.login}</h3>
+        <h3>{login}</h3>
         <form onSubmit={handleSubmit(onSubmit)}>
           <button type="submit">Logout</button>
         </form>
